@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fabiano.fablog.domain.model.Client;
 import com.fabiano.fablog.domain.repository.ClientRepository;
+import com.fabiano.fablog.domain.service.ClientService;
 
 import lombok.AllArgsConstructor;
 
@@ -27,6 +28,7 @@ import lombok.AllArgsConstructor;
 public class ClientController {
     
     private ClientRepository clientRepository;
+    private ClientService clientService;
 
     @GetMapping
     public List<Client> list() {
@@ -43,7 +45,7 @@ public class ClientController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Client add(@Valid @RequestBody Client client){
-        return clientRepository.save(client);
+        return clientService.save(client);
     }
 
     @PutMapping("/{clientId}")
@@ -52,7 +54,7 @@ public class ClientController {
             return ResponseEntity.notFound().build();
         }
         client.setId(clientId);
-        client = clientRepository.save(client);
+        client = clientService.save(client);
         return ResponseEntity.ok(client);
     }
 
@@ -61,7 +63,7 @@ public class ClientController {
         if (!clientRepository.existsById(clientId)){
             return ResponseEntity.notFound().build();
         }
-        clientRepository.deleteById(clientId);
+        clientService.delete(clientId);
         return ResponseEntity.noContent().build();
     }
 }
