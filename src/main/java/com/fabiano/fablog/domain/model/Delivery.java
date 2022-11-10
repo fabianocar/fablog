@@ -3,6 +3,7 @@ package com.fabiano.fablog.domain.model;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -35,6 +36,10 @@ public class Delivery {
 
     @Enumerated(EnumType.STRING)
     private StatusDelivery status;
+
+    @Column(name = "dateorder")
     private LocalDateTime dateOrder;
+
+    @Column(name = "datefinal")
     private LocalDateTime dateFinal;
 }
