@@ -1,4 +1,4 @@
-package com.fabiano.fablog.api.model;
+package com.fabiano.fablog.api.dto;
 
 import lombok.Getter;
 import lombok.Setter;

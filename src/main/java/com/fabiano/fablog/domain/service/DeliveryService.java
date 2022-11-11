@@ -1,6 +1,6 @@
 package com.fabiano.fablog.domain.service;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +25,7 @@ public class DeliveryService {
 
         delivery.setClient(client);
         delivery.setStatus(StatusDelivery.PENDING);
-        delivery.setDateOrder(LocalDateTime.now());
+        delivery.setDateOrder(OffsetDateTime.now());
 
         return deliveryRepository.save(delivery);
 

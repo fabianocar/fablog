@@ -7,7 +7,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fabiano.fablog.domain.ValidationGroups;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,6 +21,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "client")
 public class Client {
     
+    @NotNull(groups = ValidationGroups.ClientId.class)
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

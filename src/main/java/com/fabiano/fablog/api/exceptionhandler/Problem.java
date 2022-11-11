@@ -1,6 +1,6 @@
 package com.fabiano.fablog.api.exceptionhandler;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 public class Problem {
     private Integer status;
-    private LocalDateTime dateHour;
+    private OffsetDateTime dateHour;
     private String title;
     private List<Fild> filds;
 }
