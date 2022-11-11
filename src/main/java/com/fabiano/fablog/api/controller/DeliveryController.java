@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fabiano.fablog.api.assembler.DeliveryMapper;
 import com.fabiano.fablog.api.dto.DeliveryDTO;
+import com.fabiano.fablog.api.dto.input.DeliveryInput;
 import com.fabiano.fablog.domain.model.Delivery;
 import com.fabiano.fablog.domain.repository.DeliveryRepository;
 import com.fabiano.fablog.domain.service.DeliveryService;
@@ -33,8 +34,10 @@ public class DeliveryController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public DeliveryDTO requestDelivery (@Valid @RequestBody Delivery delivery){
-        Delivery deliveryRequested = deliveryService.requestDelivery(delivery);
+    public DeliveryDTO requestDelivery (@Valid @RequestBody DeliveryInput deliveryInput){
+        Delivery newDelivery = deliveryMapper.toEntity(deliveryInput);
+        
+        Delivery deliveryRequested = deliveryService.requestDelivery(newDelivery);
         return deliveryMapper.toModel(deliveryRequested);
     }
 

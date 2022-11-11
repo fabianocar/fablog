@@ -21,7 +21,6 @@ import lombok.EqualsAndHashCode;
 @Table(name = "client")
 public class Client {
     
-    @NotNull(groups = ValidationGroups.ClientId.class)
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
