@@ -7,10 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.fabiano.fablog.domain.ValidationGroups;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
