@@ -1,6 +1,6 @@
 package com.fabiano.fablog.api.exceptionhandler;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +39,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
             
         Problem problem = new Problem();
         problem.setStatus(status.value());
-        problem.setDateHour(LocalDateTime.now());
+        problem.setDateHour(OffsetDateTime.now());
         problem.setTitle("Um ou mais campos estão inválidos, corrija e tente novamente!");
         problem.setFilds(filds);
 
@@ -53,7 +53,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
         Problem problem = new Problem();
         problem.setStatus(status.value());
-        problem.setDateHour(LocalDateTime.now());
+        problem.setDateHour(OffsetDateTime.now());
         problem.setTitle(be.getMessage());
 
         return handleExceptionInternal(be, problem, new HttpHeaders(), status, request);
