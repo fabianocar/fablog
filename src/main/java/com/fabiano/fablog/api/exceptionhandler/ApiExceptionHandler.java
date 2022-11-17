@@ -17,6 +17,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.fabiano.fablog.domain.exception.BusinessException;
+import com.fabiano.fablog.domain.exception.EntityNotFoundException;
 
 import lombok.AllArgsConstructor;
 
@@ -44,6 +45,19 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         problem.setFilds(filds);
 
         return handleExceptionInternal(ex, problem, headers, status, request);
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<Object> handleEntityNotFound(BusinessException be, WebRequest request){
+       
+        HttpStatus status = HttpStatus.NOT_FOUND;
+
+        Problem problem = new Problem();
+        problem.setStatus(status.value());
+        problem.setDateHour(OffsetDateTime.now());
+        problem.setTitle(be.getMessage());
+
+        return handleExceptionInternal(be, problem, new HttpHeaders(), status, request);
     }
 
     @ExceptionHandler(BusinessException.class)
