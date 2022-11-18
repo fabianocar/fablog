@@ -17,6 +17,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+
+import com.fabiano.fablog.domain.exception.BusinessException;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -60,6 +63,23 @@ public class Delivery {
         this.getOccurrence().add(occurrence);
 
         return occurrence;
+    }
+
+    public void finalize() {
+        if(notCanFinalize()){
+            throw new BusinessException("Entrega não pode ser finalizada");
+        }
+        
+        setStatus(StatusDelivery.FINALIZED);
+        setDateFinal(OffsetDateTime.now());
+    }
+
+    public boolean canFinalize(){
+        return StatusDelivery.PENDING.equals(getStatus());
+    }
+
+    public boolean notCanFinalize(){
+        return !canFinalize();
     }
 
 }
