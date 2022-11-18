@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -20,6 +21,7 @@ import com.fabiano.fablog.api.dto.input.DeliveryInput;
 import com.fabiano.fablog.domain.model.Delivery;
 import com.fabiano.fablog.domain.repository.DeliveryRepository;
 import com.fabiano.fablog.domain.service.DeliveryService;
+import com.fabiano.fablog.domain.service.finalizationDeliveryService;
 
 import lombok.AllArgsConstructor;
 
@@ -30,6 +32,7 @@ public class DeliveryController {
     
     private DeliveryRepository deliveryRepository;
     private DeliveryService deliveryService;
+    private finalizationDeliveryService finalizationDeliveryService;
     private DeliveryMapper deliveryMapper;
 
     @PostMapping
@@ -39,6 +42,12 @@ public class DeliveryController {
         
         Delivery deliveryRequested = deliveryService.requestDelivery(newDelivery);
         return deliveryMapper.toModel(deliveryRequested);
+    }
+
+    @PutMapping("/{deliveryId}/finalization")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void finalized(@PathVariable Long deliveryId){
+        finalizationDeliveryService.finalization(deliveryId);
     }
 
     @GetMapping
